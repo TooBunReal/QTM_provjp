@@ -1,0 +1,31 @@
+{
+  "name": "doannedanu",
+  "version": "1.0.0",
+  "description": "QTM_project",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js",
+    "dev": "bash -c 'docker compose down && docker compose build && docker compose up'",
+    "dev:clean": "bash -c 'sudo rm -rf *-data && pnpm dev'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TooBunReal/QTM_provjp.git"
+  },
+  "author": "TooBunReal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TooBunReal/QTM_provjp/issues"
+  },
+  "homepage": "https://github.com/TooBunReal/QTM_provjp#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.3",
+    "pg-promise": "^11.5.4",
+    "sqlite3": "^5.1.6"
+  }
+}

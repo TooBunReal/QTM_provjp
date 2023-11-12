@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  web-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+
+  database:
+    build:
+      context: .
+      dockerfile: Dockerfile.pg
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  # pgadmin:
+  #   image: docker.io/dpage/pgadmin4
+  #   ports:
+  #     - 5433:80
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - database
+  #   networks:
+  #     - shared-network
+  #   volumes:
+  #     - ./pgadmin-data/:/var/lib/pgadmin/
