@@ -1,11 +1,12 @@
+
 const express = require('express');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const { jwtMiddleware, sign } = require('./jwt');
 
 dotenv.config();
 
+const { jwtMiddleware, sign } = require('./jwt');
 const { registerUser, loginUser } = require('./dataquery');
 
 const app = express();
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'templates', 'main.html'));
 });
 
-app.get("/login", function (req, res) {
+app.get('/login', function (req, res) {
     res.sendFile(path.join(__dirname, 'public', 'templates', 'login.html'));
 });
 
@@ -56,7 +57,8 @@ app.post('/login', (req, res) => {
 
         if (user) {
             const token = jwt.sign({ username: user.username, role: user.role }, secretKey);
-            res.json({ token });
+            res.cookie('token', token);
+            res.redirect('/dashboard');
         } else {
             res.status(401).send('Tên đăng nhập hoặc mật khẩu không đúng!');
         }

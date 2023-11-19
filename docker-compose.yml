@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    env_file:
+      - .env
     depends_on:
       - database
 
@@ -21,6 +23,12 @@ services:
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+networks:
+  my-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.25.0.0/16"
   # pgadmin:
   #   image: docker.io/dpage/pgadmin4
   #   ports:

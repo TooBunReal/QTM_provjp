@@ -1,4 +1,6 @@
 const pgp = require('pg-promise')({});
+const dotenv = require('dotenv');
+dotenv.config();
 const connectionString = process.env.DATABASE_URL;
 const db = pgp(connectionString);
 
@@ -21,6 +23,7 @@ function registerUser(gmail, username, pass, callback) {
                 .catch(callback);
         })
         .catch(callback);
+    console.log("dang ky thanh cong");
 }
 
 function loginUser(username, pass, callback) {
