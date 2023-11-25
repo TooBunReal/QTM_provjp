@@ -38,6 +38,7 @@ function loginUser(username, pass, callback) {
             }
         })
         .catch(callback);
+    console.log("login thanh cong");
 }
 
 module.exports = {

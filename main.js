@@ -56,7 +56,7 @@ app.post('/login', (req, res) => {
         }
 
         if (user) {
-            const token = jwt.sign({ username: user.username, role: user.role }, secretKey);
+            const token = jwt.sign({ username: user.username, role: "user" }, secretKey);
             res.cookie('token', token);
             res.redirect('/dashboard');
         } else {
