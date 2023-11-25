@@ -28,7 +28,7 @@ app.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'templates', 'register.html'));
 });
 
-app.get('/dashboard', jwtMiddleware, (req, res) => {
+app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'templates', 'dashboard.html'));
 });
 
