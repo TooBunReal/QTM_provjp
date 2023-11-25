@@ -11,7 +11,7 @@ const { registerUser, loginUser } = require('./dataquery');
 
 const app = express();
 const port = 3000;
-const secretKey = process.env.SECRET_KEY;
+const secretKey = "d1g1t4l_dr4g0n_1s_th3_b3st_ctf";
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));

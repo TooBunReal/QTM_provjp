@@ -5,12 +5,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    networks:
+      - my-network
     ports:
       - 3000:3000
     env_file:
       - .env
-    networks:
-      - my-network
     depends_on:
       - database
 
@@ -18,30 +18,33 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.pg
+    networks:
+      - my-network
     ports:
       - 5432:5432
     env_file:
       - .env
-    networks:
-      - my-network
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  pgadmin:
+    image: docker.io/dpage/pgadmin4
+    ports:
+      - 5433:80
+    env_file:
+      - .env
+    depends_on:
+      - database
+    networks:
+      - my-network
+    volumes:
+      - ./pgadmin-data/:/var/lib/pgadmin/
 networks:
   my-network:
     driver: bridge
     ipam:
       config:
         - subnet: "172.25.0.0/16"
-  # pgadmin:
-  #   image: docker.io/dpage/pgadmin4
-  #   ports:
-  #     - 5433:80
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     - database
-  #   networks:
-  #     - shared-network
-  #   volumes:
-  #     - ./pgadmin-data/:/var/lib/pgadmin/
+
+# networks:
+#   vnetdocker1:
