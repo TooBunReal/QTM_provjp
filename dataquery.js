@@ -1,7 +1,7 @@
 const pgp = require('pg-promise')({});
 const dotenv = require('dotenv');
 dotenv.config();
-const connectionString = "postgresql://toobunreal:th1s_1s_sUpp3rp4ssw0rd@database:5432/main";
+const connectionString = process.env.DATABASE_URL;
 const db = pgp(connectionString);
 
 function registerUser(gmail, username, pass, callback) {
