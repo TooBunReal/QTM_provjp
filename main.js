@@ -1,10 +1,9 @@
 
 const express = require('express');
 const path = require('path');
-const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const session = require('express-session');
-const SessionCookie = require('express-session-cookie');
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 
@@ -15,19 +14,14 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
 }));
 
-app.use('/dashboard', SessionCookie({
-    sessionName: 'token',
-    sessionOptions: {
-        httpOnly: true,
-        secure: false,
-    },
-}));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'templates', 'main.html'));
 });
@@ -44,7 +38,7 @@ app.get('/dashboard', (req, res) => {
     if (req.session.user) {
         res.sendFile(path.join(__dirname, 'public', 'templates', 'dashboard.html'));
     } else {
-        res.redirect('/login');
+        res.redirect('/');
     }
 });
 
@@ -65,6 +59,7 @@ app.post('/register', (req, res) => {
             return res.status(500).send(err.message);
         }
         res.send('Đăng ký thành công!');
+        res.redirect('/login');
     });
 });
 
@@ -76,7 +71,6 @@ app.post('/login', (req, res) => {
         }
 
         if (user) {
-            const token = jwt.sign({ username: user.username, role: "user" }, secretKey);
             req.session.user = user;
             res.redirect('/dashboard');
         } else {

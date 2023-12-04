@@ -27,18 +27,6 @@ services:
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-  pgadmin:
-    image: docker.io/dpage/pgadmin4
-    ports:
-      - 5433:80
-    env_file:
-      - .env
-    depends_on:
-      - database
-    networks:
-      - my-network
-    volumes:
-      - ./pgadmin-data/:/var/lib/pgadmin/
 networks:
   my-network:
     driver: bridge

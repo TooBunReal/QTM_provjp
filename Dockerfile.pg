@@ -1,2 +1,2 @@
-FROM postgres:latest AS postgres
+FROM docker.io/postgres:latest AS postgres
 EXPOSE 5432
