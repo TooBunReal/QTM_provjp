@@ -45,6 +45,3 @@ networks:
     ipam:
       config:
         - subnet: "172.25.0.0/16"
-
-# networks:
-#   vnetdocker1:
