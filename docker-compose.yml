@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      image: docker.io/toobunreal/web-app:latest
     networks:
       - my-network
     ports:
@@ -18,6 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.pg
+      image: docker.io/toobunreal/database:latest
     networks:
       - my-network
     ports:
