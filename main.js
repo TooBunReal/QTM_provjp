@@ -58,7 +58,6 @@ app.post('/register', (req, res) => {
             }
             return res.status(500).send(err.message);
         }
-        res.send('Đăng ký thành công!');
         res.redirect('/login');
     });
 });

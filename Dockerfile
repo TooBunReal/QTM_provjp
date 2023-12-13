@@ -20,4 +20,4 @@ RUN pnpm install
 FROM base
 COPY --from=prod-deps /app/node_modules /app/node_modules
 EXPOSE 3000
-CMD ["node", "main.js" , "--env-file=.env"]
+CMD ["node", "main.js"]
